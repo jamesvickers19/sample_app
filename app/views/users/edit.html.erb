@@ -9,8 +9,12 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
+<!--  Removing this field so the user cannot edit their email address,
+      to avoid adding functionality to re-verify the new address and such.
+    
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
+-->
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
