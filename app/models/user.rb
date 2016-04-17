@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
                                    
 
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :approval_token
 
   before_save :downcase_email
 
-  before_create :create_activation_digest
+  before_create :create_activation_digest, :create_approval_digest
 
   validates :name,  presence: true, length: { maximum: 50 }
 
@@ -61,9 +61,20 @@ class User < ActiveRecord::Base
     update_attribute(:activated_at, Time.zone.now)
   end
 
+  # Approves an account
+  def approve
+    update_attribute(:approved, true)
+    update_attribute(:approved_at, Time.zone.now)
+  end
+
   # Sends activation email
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # Sends approval email
+  def send_approval_email
+    UserMailer.account_approval(self).deliver_now
   end
 
   # Sets the password reset attributes.
@@ -118,6 +129,12 @@ class User < ActiveRecord::Base
   def create_activation_digest
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  # Creates and assigns the approval token and digest (new user approval)
+  def create_approval_digest
+    self.approval_token = User.new_token
+    self.approval_digest = User.digest(approval_token)
   end
   
 end

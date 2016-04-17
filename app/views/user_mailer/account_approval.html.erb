@@ -1,0 +1,13 @@
+<h1>Healthcare Share</h1>
+
+<p>Hi Admin,</p>
+
+<p>
+Someone with email address: <%= @user.email %>, username: <%= @user.name %>
+<br>
+<br>
+has requested access to the site.  Click on the link below to approve their account:
+</p>
+
+<%= link_to "Approve account", edit_account_approval_url(@user.approval_token,
+                                                         email: @user.email) %>

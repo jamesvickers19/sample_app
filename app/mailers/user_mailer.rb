@@ -19,4 +19,10 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: "Password reset"
   end
+
+  def account_approval(user)
+    @user = user
+    mail to: "hcshare.management@gmail.com", subject: "Account approval"
+  end
+  
 end

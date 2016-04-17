@@ -14,6 +14,18 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match CGI::escape(user.email), mail.body.encoded
   end
 
+  test "account_approval" do
+    user = users(:michael)
+    user.approval_token = User.new_token
+    mail = UserMailer.account_approval(user)
+    assert_equal "Account approval", mail.subject
+    assert_equal ["hcshare.management@gmail.com"], mail.to
+    assert_equal ["noreply@example.com"], mail.from
+    assert_match user.name,               mail.body.encoded    
+    assert_match user.approval_token,     mail.body.encoded
+    assert_match CGI::escape(user.email), mail.body.encoded
+  end  
+
   test "password_reset" do
     user = users(:michael)
     user.reset_token = User.new_token

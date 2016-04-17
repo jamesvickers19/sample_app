@@ -1,0 +1,7 @@
+Hi Administrator,
+
+Someone with email address: <%= @user.email %>, username: <%= @user.name %>
+
+has requested access to the site.  Click on the link below to approve their account:
+
+<%= edit_account_approval_url(@user.approval_token, email: @user.email) %>
