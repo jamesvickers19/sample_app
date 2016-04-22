@@ -7,7 +7,9 @@ class Micropost < ActiveRecord::Base
                                          foreign_key: "encouraged_id",
                                          dependent: :destroy
 
-  has_many :encouragers, through: :encouragement_relationships, source: :encourager
+  has_many :encouragers, through: :encouragement_relationships
+                         #, source: :encourager [not required since its the singular of 'encouragers'
+                         #                       and matches up to :encourager in PostEncouragement
   ###################################################################################
   
   default_scope -> { order(created_at: :desc) }

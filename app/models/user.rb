@@ -14,7 +14,9 @@ class User < ActiveRecord::Base
   has_many :encourager_relationships, class_name: "PostEncouragement",
                                       foreign_key: "encourager_id",
                                       dependent: :destroy
-  has_many :encouraged_posts, through: :encourager_relationships, source: :encouraged
+  has_many :encouraged, through: :encourager_relationships
+                        # , source: :encouraged
+                        # [Not required since it matches :encouraged in PostEncouragement]
   ##############################################################################                                   
 
   attr_accessor :remember_token, :activation_token, :reset_token, :approval_token
@@ -136,7 +138,7 @@ class User < ActiveRecord::Base
   # Returns true if the current user encourages a post
   def encourages?(post)
     self.reload
-    encouraged_posts.include?(post)
+    encouraged.include?(post)
   end
 
   # Private methods ##########################################
