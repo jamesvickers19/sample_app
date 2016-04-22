@@ -1,5 +1,15 @@
 class Micropost < ActiveRecord::Base
+
   belongs_to :user
+
+  # MicropostEncouragement's
+  has_many :encouragement_relationships, class_name: "PostEncouragement",
+                                         foreign_key: "encouraged_id",
+                                         dependent: :destroy
+
+  has_many :encouragers, through: :encouragement_relationships, source: :encourager
+  ###################################################################################
+  
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true

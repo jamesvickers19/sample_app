@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417161827) do
+ActiveRecord::Schema.define(version: 20160421235224) do
+
+  create_table "micropost_encouragements", force: :cascade do |t|
+    t.integer  "micropost_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "micropost_encouragements", ["micropost_id", "user_id"], name: "index_micropost_encouragements_on_micropost_id_and_user_id", unique: true
+  add_index "micropost_encouragements", ["micropost_id"], name: "index_micropost_encouragements_on_micropost_id"
+  add_index "micropost_encouragements", ["user_id"], name: "index_micropost_encouragements_on_user_id"
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"
@@ -23,6 +34,17 @@ ActiveRecord::Schema.define(version: 20160417161827) do
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
+
+  create_table "post_encouragements", force: :cascade do |t|
+    t.integer  "encouraged_id"
+    t.integer  "encourager_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "post_encouragements", ["encouraged_id"], name: "index_post_encouragements_on_encouraged_id"
+  add_index "post_encouragements", ["encourager_id", "encouraged_id"], name: "index_post_encouragements_on_encourager_id_and_encouraged_id", unique: true
+  add_index "post_encouragements", ["encourager_id"], name: "index_post_encouragements_on_encourager_id"
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"

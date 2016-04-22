@@ -9,7 +9,13 @@ class User < ActiveRecord::Base
                                    dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-                                   
+
+  # Encouragements
+  has_many :encourager_relationships, class_name: "PostEncouragement",
+                                      foreign_key: "encourager_id",
+                                      dependent: :destroy
+  has_many :encouraged_posts, through: :encourager_relationships, source: :encouraged
+  ##############################################################################                                   
 
   attr_accessor :remember_token, :activation_token, :reset_token, :approval_token
 
@@ -115,6 +121,22 @@ class User < ActiveRecord::Base
   # Returns true if the current user is following the other user
   def following?(other_user)
     self.following.include?(other_user)
+  end
+
+  # Encourages a post (micropost_encouragement)
+  def encourage(post)
+    encourager_relationships.create!(encouraged_id: post.id)
+  end
+
+  # Removes encouragement from a post
+  def removeEncouragement(post)
+    encourager_relationships.find_by(encouraged_id: post.id).destroy!
+  end
+
+  # Returns true if the current user encourages a post
+  def encourages?(post)
+    self.reload
+    encouraged_posts.include?(post)
   end
 
   # Private methods ##########################################
