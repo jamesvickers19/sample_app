@@ -13,17 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160421235224) do
 
-  create_table "micropost_encouragements", force: :cascade do |t|
-    t.integer  "micropost_id"
-    t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "micropost_encouragements", ["micropost_id", "user_id"], name: "index_micropost_encouragements_on_micropost_id_and_user_id", unique: true
-  add_index "micropost_encouragements", ["micropost_id"], name: "index_micropost_encouragements_on_micropost_id"
-  add_index "micropost_encouragements", ["user_id"], name: "index_micropost_encouragements_on_user_id"
-
   create_table "microposts", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"

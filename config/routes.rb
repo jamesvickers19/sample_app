@@ -21,7 +21,17 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :account_approvals,   only: [:edit] 
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]
+
+  # micropost in tutorial:
+  # only: [:create, :destroy] 
+  resources :microposts do 
+    member do
+      get :encouragers
+    end
+  end
+
+  resources :post_encouragements,      only: [:create, :destroy]
+
   resources :relationships,       only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

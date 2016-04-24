@@ -40,3 +40,9 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# Post encouragement relationships
+users = User.order(:created_at).take(6)
+encouragers = users[0..2]
+encouraged_user = users[4]
+encouragers.each { |encourager| encourager.encourage(encouraged_user.microposts.first) }

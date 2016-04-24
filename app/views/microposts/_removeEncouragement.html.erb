@@ -1,0 +1,5 @@
+<!-- Provided form variables: 'micropost' -->
+<%= form_for(current_user.encourager_relationships.find_by(encouraged_id: micropost.id),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Remove encouragement from post", class: "btn btn-primary" %>
+<% end %>

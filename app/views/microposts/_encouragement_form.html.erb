@@ -1,0 +1,9 @@
+<!-- Unless statement: don't render encouragement form for the user's own posts -->
+<% unless current_user?(micropost.user) %>
+  <div id="encouragement_form">
+  <% if current_user.encourages?(micropost) %>
+    <%= render 'microposts/removeEncouragement', micropost: micropost %>
+  <% else %>
+    <%= render 'microposts/encourage', micropost: micropost %>
+  <% end %> 
+<% end %>
