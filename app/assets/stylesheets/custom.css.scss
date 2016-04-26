@@ -3,6 +3,25 @@
 
 /* microposts */
 
+/* Follow and unfollow button */
+.follow_unfollow_button {
+  background-color: #80d4ff
+}
+
+/* Encouragement button */
+.encourage_button {
+  background-color: #4CAF50;  /* green */
+  height: 100px;
+  width: 125px;
+}
+
+/* Remove encouragement button */
+.removeEncouragement_button {
+  background-color: #ff4d4d;  /* red */
+  height: 100px;
+  width: 240px;  
+}
+
 .microposts {
   list-style: none;
   padding: 0;

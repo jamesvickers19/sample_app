@@ -6,15 +6,13 @@ class PostEncouragementsController < ApplicationController
   def create
     post = Micropost.find(params[:encouraged_id])
     current_user.encourage(post)
-    # TODO: change this redirection...
-    redirect_to post.user
+    redirect_to request.referrer  # either home page or a user's page.
   end
 
   def destroy
     post = PostEncouragement.find(params[:id]).encouraged
     current_user.removeEncouragement(post)
-    # TODO: change this redirection...    
-    redirect_to post.user
+    redirect_to request.referrer # either home page or a user's page.
   end
   
 end
