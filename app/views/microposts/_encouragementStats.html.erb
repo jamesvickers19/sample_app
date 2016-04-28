@@ -1,0 +1,7 @@
+<div class="encouragementStats">
+  <a href="<%= encouragers_micropost_path(micropost) %>">
+    <strong id="encouragers" class="encouragement">
+      <%= pluralize(micropost.encouragers.count, 'encourager') %>
+    </strong>
+  </a>
+</div>

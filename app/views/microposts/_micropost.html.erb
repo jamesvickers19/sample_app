@@ -12,6 +12,9 @@
 	  data: { confirm: "You sure?" } %>
     <% end %>
   </span>
+  <span>
+    <%= render 'microposts/encouragementStats', micropost: micropost %>
+  </span>
   <span class="encouragement_form">
     <%= render 'microposts/encouragement_form', micropost: micropost %>
   </span>  
