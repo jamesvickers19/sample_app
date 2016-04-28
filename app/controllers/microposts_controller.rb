@@ -3,9 +3,13 @@ class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :encouragers]
   before_action :correct_user,   only: :destroy
 
+  
   def encouragers
+    @title = "Encouragers"
+    @micropost = Micropost.find(params[:id])
+    @encouragers = @micropost.encouragers
+    render 'show_encouragers'
   end
-
 
   def create
     @micropost = current_user.microposts.build(micropost_params)

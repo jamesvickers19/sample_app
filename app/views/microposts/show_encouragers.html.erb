@@ -1,0 +1,11 @@
+<% provide(:title, @title) %>
+<div>
+  <h3>
+    <%= @title %> (<%= @encouragers.size %>)
+  </h3>
+  <% if @encouragers.any? %>
+    <ul class="micropost encouragers">
+      <%= render @encouragers %>
+    </ul>
+  <% end %>
+</div>
