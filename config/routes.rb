@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   # micropost in tutorial:
   # only: [:create, :destroy] 
-  resources :microposts do 
+  resources :microposts, only: [:create, :destroy] do 
     member do
       get :encouragers
     end
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :post_encouragements,      only: [:create, :destroy]
 
-  resources :relationships,       only: [:create, :destroy]
+  resources :relationships,            only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
