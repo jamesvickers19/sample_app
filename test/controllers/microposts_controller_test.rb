@@ -28,5 +28,10 @@ class MicropostsControllerTest < ActionController::TestCase
     end
     assert_redirected_to root_url
   end
+
+  test "should redirect post encouragers when not logged in" do
+    get :encouragers, id: @micropost
+    assert_redirected_to login_url
+  end
   
 end
